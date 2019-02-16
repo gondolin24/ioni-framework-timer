@@ -60,6 +60,7 @@
     "no-empty-interface": true,
     "no-eval": true,
     "no-inferrable-types": [
+      "ignore-properties",
       true,
       "ignore-params"
     ],
