@@ -1,27 +1,42 @@
 <ion-content padding>
- <ion-item [color]="'dark'">
+    <ion-item [color]="'dark'">
 
-   <ion-label>Rest Duration</ion-label>
-   <ion-datetime [placeholder]="'Tap Here'" [displayFormat]="'mm:ss'" [(ngModel)]="fullTime"></ion-datetime>
+        <ion-label>Set Bake Interval</ion-label>
+        <ion-datetime [placeholder]="'Tap Here'" [displayFormat]="'HH:mm:ss'" [(ngModel)]="fullTime"></ion-datetime>
 
- </ion-item>
+    </ion-item>
+    <h1> Current Interval {{fullTime}} </h1>
+    <circle-progress
+            (onClick)="startTime()"
+            [percent]="percent"
+[title]="getTitle()"
+            [maxPercent]="100"
+            [radius]="radius"
+            [showSubtitle]="false"
+            [showUnits]="false"
+            [outerStrokeWidth]="16"
+            [outerStrokeColor]="'#4882c2'"
+            [innerStrokeWidth]="3"
+            [showZeroOuterStroke]="false"
+            [backgroundStroke]="'#33003f'"
+            [backgroundStrokeWidth]="3"
+            [outerStrokeGradient]="true"
+            [outerStrokeGradientStopColor]="'#FF00CB'"
+            [showInnerStroke]="false"
+    ></circle-progress>
+    <p> Overall Bake Time {{ elapsed.h}}:{{elapsed.m}}:{{elapsed.s}}</p>
 
-  <circle-progress
-          (onClick)="startTime()"
-          [percent]="percent"
-          [maxPercent]="100"
-          [radius]="radius"
-          [showTitle]="false"
-          [showSubtitle]="false"
-          [showUnits]="false"
-          [outerStrokeWidth]="16"
-          [outerStrokeColor]="'#*000FF'"
-          [innerStrokeWidth]="3"
-          [showZeroOuterStroke]="false"
-          [backgroundStroke]="'#33003f'"
-          [backgroundStrokeWidth]="3"
-          [outerStrokeGradient]="true"
-          [outerStrokeGradientStopColor]="'#FF00CB'"
-          [showInnerStroke]="false"
-  ></circle-progress>
+    <ion-fab [vertical]="'bottom'" [horizontal]="'end'" slot="fixed">
+        <ng-container *ngIf="timer == false; else running">
+            <ion-fab-button (click)="startTime()">
+                <ion-icon name="play"></ion-icon>
+            </ion-fab-button>
+        </ng-container>
+        <ng-template #running>
+            <ion-fab-button (click)="stopTimer()">
+                <ion-icon name="square"></ion-icon>
+            </ion-fab-button>
+        </ng-template>
+    </ion-fab>
+
 </ion-content>
